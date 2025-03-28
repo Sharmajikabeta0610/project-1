@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manisha's Surprise 🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* Background & Layout */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ffcccc, #ff99aa);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 370px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animated Handwritten Text */
+        .message-box p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            font-weight: bold;
+            color: #cc3333;
+            text-shadow: 2px 2px 4px rgba(255, 100, 100, 0.6);
+            letter-spacing: 1px;
+            padding: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Floating Hearts & Petals */
+        .floating {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.6;
+            animation: floatUp 5s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0px) scale(1); opacity: 0.8; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Emojis Inside Container */
+        .corner-emojis {
+            display: flex;
+            justify-content: space-between;
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .btn {
+            background: #ff6666;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .btn:hover {
+            background: #cc3333;
+            transform: scale(1.1);
+            box-shadow: 6px 6px 12px rgba(255, 100, 100, 0.5);
+        }
+
+        /* Tooltip Below Button */
+        .btn::after {
+            content: attr(data-gist);
+            position: absolute;
+            background: #cc3333;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="corner-emojis">
+            <div>😊</div>
+            <div>🤭</div>
+        </div>
+        <div class="message-box">
+            <p>A little digital surprise for you, <br> Manisha! 🎀💌</p>
+        </div>
+        <div class="buttons">
+            <button class="btn" data-gist="Cherished Memories 📸" onclick="window.location.href='MemoryVault.html'">📜 Memory Vault</button>
+            <button class="btn" data-gist="A Secret Awaits... 🔐" onclick="window.location.href='DecodeTheLetter.html'">💌 Decode The Letter</button>
+        </div>
+    </div>
+
+    <!-- Floating Hearts & Petals Effect -->
+    <script>
+        function createFloatingElement() {
+            const element = document.createElement("div");
+            element.classList.add("floating");
+            element.innerHTML = Math.random() > 0.5 ? "❤️" : "🌸";
+
+            document.body.appendChild(element);
+
+            const size = Math.random() * 20 + 10 + "px";
+            element.style.left = Math.random() * 100 + "vw";
+            element.style.animationDuration = Math.random() * 3 + 3 + "s";
+            element.style.fontSize = size;
+
+            setTimeout(() => {
+                element.remove();
+            }, 5000);
+        }
+
+        setInterval(createFloatingElement, 800);
+    </script>
+
+    <!-- Background Music -->
+    <audio autoplay loop>
+        <source src="song1.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+</body>
+</html>

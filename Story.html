@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story (So Far) 🎞️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ffcccc, #ff99aa);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Container for Content */
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Scene Transitions */
+        .scene {
+            display: none;
+        }
+
+        .scene.active {
+            display: block;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0px); }
+        }
+
+        /* Typing Effect (Now Mobile Friendly) */
+        .message p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            font-weight: bold;
+            color: #cc3333;
+            text-shadow: 2px 2px 4px rgba(255, 100, 100, 0.6);
+            letter-spacing: 1px;
+            padding: 5px;
+            white-space: normal; /* Allows text wrapping */
+            overflow: hidden;
+            display: inline-block;
+            max-width: 100%;
+            text-align: center;
+            animation: typing 2.5s steps(30, end) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Next Button Styling */
+        .next-btn {
+            background: #ff6666;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .next-btn:hover {
+            background: #cc3333;
+            transform: scale(1.1);
+        }
+
+        /* Confetti Effect */
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: red;
+            opacity: 0.7;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .message p {
+                font-size: 18px;
+            }
+            .next-btn {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="scene active" id="scene1">
+            <div class="message"><p>So... something unexpected happened. ✨</p></div>
+            <button class="next-btn" onclick="nextScene()">Next ➡️</button>
+        </div>
+
+        <div class="scene" id="scene2">
+            <div class="message"><p>Feb 7 – A friend drops a bomb: "Did you know she liked you for years?" 🤯</p></div>
+            <button class="next-btn" onclick="nextScene()">Next ➡️</button>
+        </div>
+
+        <div class="scene" id="scene3">
+            <div class="message"><p>Me: *Processing* 😵‍💫</p></div>
+            <button class="next-btn" onclick="nextScene()">Next ➡️</button>
+        </div>
+
+        <div class="scene" id="scene4">
+            <div class="message"><p>Feb 23 – Had to ask her...</p></div>
+            <button class="next-btn" onclick="nextScene()">Next ➡️</button>
+        </div>
+
+        <div class="scene" id="scene5">
+            <div class="message"><p>Manisha: *Hehe... true.* 😏</p></div>
+            <button class="next-btn" onclick="confettiEffect(); nextScene();">Next ➡️</button>
+        </div>
+
+        <div class="scene" id="scene6">
+            <div class="message"><p>Confirmed ✅ 🎉</p></div>
+            <button class="next-btn" onclick="nextScene()">Next ➡️</button>
+        </div>
+
+        <div class="scene" id="scene7">
+            <div class="message"><p>So... now we figure things out together. No pressure, just vibes. 😉</p></div>
+            <button class="next-btn" onclick="endAnimation()">End 🎬</button>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        let currentScene = 1;
+
+        function nextScene() {
+            document.getElementById(`scene${currentScene}`).classList.remove('active');
+            currentScene++;
+            if (document.getElementById(`scene${currentScene}`)) {
+                document.getElementById(`scene${currentScene}`).classList.add('active');
+            }
+        }
+
+        function confettiEffect() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.backgroundColor = ["red", "pink", "gold", "purple"][Math.floor(Math.random() * 4)];
+                confetti.style.animationDuration = (Math.random() * 2 + 1) + "s";
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function endAnimation() {
+            alert("This is just the beginning! 🎬💖");
+        }
+    </script>
+
+</body>
+</html>
